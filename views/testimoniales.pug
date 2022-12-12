@@ -1,0 +1,31 @@
+extends ./layout/index
+
+block contenido
+    main.container.mt-5 
+        h1.text-center.mt-5 #{pagina}
+
+        blockquote.text-center Lee sobre nuestros clientes y sus experiencias
+        include ./layout/bloque_testimoniales
+
+        .row
+            .col-md-12
+                h2.d-block.w-100.text-center Agrega un Testimonial 
+
+                if(errores)
+                    each error in errores 
+                        .alert.col.alert-danger.text-center= error.mensaje
+
+            .row.justify-content-center.col 
+                .col-md-8 
+                    form(action="/testimoniales" method="POST") 
+                        .form-group 
+                            label(for="nombre") Nombre 
+                            input#nombre(type="text", name="nombre", placeholder="Tu Nombre", class="form-control",value=nombre) 
+                            //- La importancia de poner name: con express.urlencoded() podemos leer el valor gracias a "name"
+                        .form-group 
+                            label(for="correo") Correo Electrónico
+                            input#correo(type="text", name="correo", placeholder="Tu Correo ", class="form-control", value=correo)
+                        .form-group 
+                            label(for="mensaje") Mensaje
+                            textarea#mensaje(name="mensaje", cols="30", rows="10", class="form-control", placeholder="Tu Mensaje")= mensaje
+                        input.btn.btn-success.btn-block(type="submit")
