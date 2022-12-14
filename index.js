@@ -34,6 +34,6 @@ app.use(express.static("public"))
 //Agregar router
 app.use("/", router) //use contiene todos los verbos: get, post... ; y a la ruta / estamos agregandole todas las demas rutas.
 
-app.listen(process.env.PORT || 4000, () => {
-    console.log("El servidor esta funcionando en el puerto", process.env.PORT || 4000)
+app.listen(process.env.PORT || 7015, () => {
+    console.log("El servidor esta funcionando en el puerto", process.env.PORT || 7015)
 })
