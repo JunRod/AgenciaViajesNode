@@ -1,6 +1,7 @@
 import express from "express";
 import router from "./routes/index.js";
 import db from "./config/db.js"
+import dotenv from "dotenv/config" 
 
 const app = express()
 
@@ -8,9 +9,6 @@ const app = express()
 db.authenticate()
     .then( () => console.log("Base de datos conectada"))
     .catch( error => console.log(error) )
-
-//Definir puerto
-const port = process.env.PORT || 4000
 
 //Habilitar Pug
 app.set("view engine", "pug")
@@ -30,15 +28,12 @@ app.use( (req, res, next) => {
 //Agregar body parser para leer los datos del formulario
 app.use(express.urlencoded({extended:true}))
 
-
 //Definir la carpeta publica
 app.use(express.static("public"))
 
 //Agregar router
 app.use("/", router) //use contiene todos los verbos: get, post... ; y a la ruta / estamos agregandole todas las demas rutas.
 
-app.listen(port, () => {
-    console.log("El servidor esta funcionando en el puerto", port)
+app.listen(process.env.PORT || 4000, () => {
+    console.log("El servidor esta funcionando en el puerto", process.env.PORT || 4000)
 })
-
-
